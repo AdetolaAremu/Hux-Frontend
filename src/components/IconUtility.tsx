@@ -46,3 +46,46 @@ export const EditSVG = () => {
     </div>
   );
 };
+
+export const SuccessMark = () => {
+  return (
+    <div>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="green"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="feather feather-check-circle"
+      >
+        <path d="M9 11l3 3L22 4" />
+        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+      </svg>
+    </div>
+  );
+};
+
+export const ArrowForward = () => {
+  return (
+    <div>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        strokeWidth={1.5}
+        stroke="currentColor"
+        className="size-3"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="m8.25 4.5 7.5 7.5-7.5 7.5"
+        />
+      </svg>
+    </div>
+  );
+};

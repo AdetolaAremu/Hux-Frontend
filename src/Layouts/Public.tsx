@@ -7,7 +7,7 @@ const PublicLayout = () => {
     <div>
       <div className="flex justify-between pt-3 px-10">
         <div>
-          <img src={Logo} alt="" />
+          <img src={Logo} alt="home" />
         </div>
         <div className="pt-4">About</div>
       </div>
