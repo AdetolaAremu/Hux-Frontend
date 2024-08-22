@@ -1,4 +1,3 @@
-import ROUTE from "../../../routes/Routes.json";
 import {
   AUTH_LOADING_ENDS,
   AUTH_LOADING_STARTS,
@@ -111,5 +110,5 @@ export const registerUser = (
 
 export const logoutUser = () => () => {
   localStorage.clear();
-  window.location.href = ROUTE.LOGIN;
+  window.location.href = "/auth/user";
 };
