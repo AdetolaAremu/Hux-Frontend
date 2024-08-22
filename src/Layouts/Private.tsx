@@ -1,4 +1,4 @@
-import { NavLink, Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import Home from "../views/private/Home";
 import { useEffect, useState } from "react";
 import Contact from "../views/private/Contact";
@@ -8,8 +8,8 @@ import EditContact from "../views/private/EditContact";
 import LogoutModal from "../components/LogoutModal";
 import { useAppDispatch } from "../utils/Hook";
 import { callLogoutUser } from "../views/private/actions/actions";
-import Logo from "../assets/Logo.png";
 import { LoggedInUser } from "../types/PrivateType";
+import Sidebar from "../components/Sidebar";
 
 const Private = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,8 +32,6 @@ const Private = () => {
     navigate("/auth/login");
   };
 
-  const getUser = localStorage.getItem("user");
-
   useEffect(() => {
     const getToken = localStorage.getItem("jwtToken");
     if (!getToken) return navigate("/auth/login");
@@ -46,56 +44,11 @@ const Private = () => {
 
   return (
     <div className="flex h-screen">
-      {/* Sidebar */}
-      <div
-        className={`fixed inset-y-0 left-0 transform ${
-          isOpen ? "translate-x-0" : "-translate-x-full"
-        } md:relative md:translate-x-0 transition-transform duration-300 ease-in-out bg-[#7717D7] w-64 p-4`}
-      >
-        <h2 className="text-white text-2xl font-semibold my-6">
-          <img src={Logo} alt="" />
-        </h2>
-        <ul>
-          <li className="text-gray-300 rounded-md">
-            <NavLink
-              to="/user/home"
-              className={({ isActive }) =>
-                `block p-2 rounded-md ${
-                  isActive
-                    ? "bg-[#ba81f2] text-white"
-                    : "hover:bg-[#ba81f2] hover:text-white"
-                }`
-              }
-            >
-              Dashboard
-            </NavLink>
-          </li>
-
-          <li className="text-gray-300 rounded-md pt-2">
-            <NavLink
-              to="/user/contacts"
-              className={({ isActive }) =>
-                `block p-2 rounded-md ${
-                  isActive
-                    ? "bg-[#ba81f2] text-white"
-                    : "hover:bg-[#ba81f2] hover:text-white"
-                }`
-              }
-            >
-              Contacts
-            </NavLink>
-          </li>
-
-          <li
-            className="text-gray-300 rounded-md pt-2 cursor-pointer"
-            onClick={toggleModal}
-          >
-            <div className="hover:bg-[#ba81f2] hover:text-white p-2">
-              Logout
-            </div>
-          </li>
-        </ul>
-      </div>
+      <Sidebar
+        isOpen={isOpen}
+        toggleSidebar={toggleSidebar}
+        toggleModal={toggleModal}
+      />
 
       <LogoutModal
         modal={isOpenModal}
@@ -103,9 +56,7 @@ const Private = () => {
         onDelete={logoutUser}
       />
 
-      {/* Main content */}
       <div className="flex-1 flex flex-col">
-        {/* Header */}
         <div className="flex justify-end pt-3 px-10 bg-gray-100">
           <div className="pt-4">
             Hi, {isUser?.firstName} {isUser?.lastName}

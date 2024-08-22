@@ -1,4 +1,4 @@
-import { SuccessMark } from "./IconUtility";
+import { SuccessMark, Xmark } from "./IconUtility";
 
 export interface IModal {
   modal: boolean;
@@ -20,7 +20,7 @@ const Modal = ({ modal, onClose, message }: IModal) => {
               onClick={onClose}
               className="text-black flex justify-end cursor-pointer"
             >
-              x
+              <Xmark />
             </div>
 
             <div>

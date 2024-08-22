@@ -1,19 +1,12 @@
 import { ThunkAction } from "redux-thunk";
 import {
   ContactResponse,
-  IContact,
   IDeleteContactResponse,
   IGetLoggedInUserResponse,
   IGetOneContactResponse,
 } from "../../../types/response/PrivateResponse";
 import { RootState } from "../../../store/RootReducer";
-import {
-  GET_DATA,
-  GET_ERRORS,
-  GET_LOGGED_IN_USER,
-  LOADING_ENDS,
-  LOADING_STARTS,
-} from "./types";
+import { GET_DATA, GET_ERRORS, LOADING_ENDS, LOADING_STARTS } from "./types";
 import { ErrorResponse } from "../../../types/response/ErrorResponse";
 import axiosInstance from "../../../utils/AxiosInterceptor";
 import { GET_ONE_DATA } from "../../auth/actions/types";
@@ -63,7 +56,7 @@ export const getContact = (
         `${service_url}/contacts/${id}`
       );
 
-      dispatch({ type: GET_ONE_DATA, payload: response.data.data?.contact });
+      dispatch({ type: GET_ONE_DATA, payload: response.data?.data?.contact });
 
       dispatch({ type: LOADING_ENDS });
     } catch (error: ErrorResponse | any) {
@@ -232,14 +225,13 @@ export const callLogoutUser = (): ThunkAction<
   any
 > => {
   return async (dispatch) => {
-    console.log("hello");
     try {
       dispatch({ type: LOADING_STARTS });
       await axiosInstance.post<IGetLoggedInUserResponse>(
         `${service_url}/auth/logout`
       );
 
-      // localStorage.clear();
+      localStorage.clear();
 
       dispatch({ type: LOADING_ENDS });
     } catch (error: ErrorResponse | any) {

@@ -8,16 +8,16 @@ interface ContactsTableProps {
 
 const ContactsTable: React.FC<ContactsTableProps> = ({ data }) => {
   return (
-    <div className="mx-auto bg-white shadow-md rounded-lg overflow-hidden">
-      <table className="w-full table-auto">
+    <div className="mx-auto bg-white shadow-md rounded-lg overflow-x-auto">
+      <table className="min-w-full table-auto">
         <thead>
-          <tr className="bg-[#7717D7] text-left text-xs">
-            <th className="px-6 py-3 text-white">S/N</th>
-            <th className="px-6 py-3 text-white">First Name</th>
-            <th className="px-6 py-3 text-white">Last Name</th>
-            <th className="px-6 py-3 text-white">Email</th>
-            <th className="px-6 py-3 text-white">Phone Number</th>
-            <th className="px-6 py-3 text-white">Actions</th>
+          <tr className="bg-[#7717D7] text-left text-xs text-white">
+            <th className="px-6 py-3">S/N</th>
+            <th className="px-6 py-3">First Name</th>
+            <th className="px-6 py-3">Last Name</th>
+            <th className="px-6 py-3">Email</th>
+            <th className="px-6 py-3">Phone Number</th>
+            <th className="px-6 py-3">Actions</th>
           </tr>
         </thead>
         <tbody className="divide-y divide-gray-200 text-sm">
@@ -29,11 +29,17 @@ const ContactsTable: React.FC<ContactsTableProps> = ({ data }) => {
               <td className="px-6 py-4 text-gray-800">{user.email}</td>
               <td className="px-6 py-4 text-gray-800">{user.phoneNumber}</td>
               <td className="px-6 py-4 text-gray-800">
-                <div className="flex">
-                  <Link to={`/user/contacts/${user._id}`} className="mr-2">
+                <div className="flex space-x-2">
+                  <Link
+                    to={`/user/contacts/${user._id}`}
+                    className="text-blue-600 hover:text-blue-800"
+                  >
                     <EyeSVG />
                   </Link>
-                  <Link to={`/user/contacts/edit/${user._id}`}>
+                  <Link
+                    to={`/user/contacts/edit/${user._id}`}
+                    className="text-blue-600 hover:text-blue-800"
+                  >
                     <EditSVG />
                   </Link>
                 </div>

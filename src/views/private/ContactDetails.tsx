@@ -38,6 +38,7 @@ const ContactDetails = () => {
 
   React.useEffect(() => {
     dispatch(getContact(id ?? ""));
+    console.log(getOneContact, "data");
   }, [dispatch]);
   return (
     <>
@@ -66,40 +67,40 @@ const ContactDetails = () => {
         </div>
       </div>
 
-      <div className="bg-white p-5 mt-7 rounded-md grid grid-cols-3">
+      <div className="bg-white p-5 mt-7 rounded-md grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         <div className="mt-3">
           <div className="text-sm">First Name</div>
-          <div className="capitalize">{getOneContact?.firstName}</div>
+          <div className="capitalize text-sm">{getOneContact?.firstName}</div>
         </div>
 
         <div className="mt-3">
           <div className="text-sm">Last Name</div>
-          <div className="capitalize">{getOneContact?.lastName}</div>
+          <div className="capitalize text-sm">{getOneContact?.lastName}</div>
         </div>
 
         <div className="mt-3">
           <div className="text-sm">Middle Name</div>
-          <div className="capitalize">{getOneContact?.middleName}</div>
+          <div className="capitalize text-sm">{getOneContact?.middleName}</div>
         </div>
 
         <div className="mt-3">
           <div className="text-sm">Email Address</div>
-          <div className="uppercase">{getOneContact?.email}</div>
+          <div className="uppercase text-sm">{getOneContact?.email}</div>
         </div>
 
         <div className="mt-3">
           <div className="text-sm">Phone Number</div>
-          <div>{getOneContact?.phoneNumber}</div>
+          <div className="text-sm">{getOneContact?.phoneNumber}</div>
         </div>
 
         <div className="mt-3">
           <div className="text-sm">Country</div>
-          <div className="capitalize">{getOneContact?.country}</div>
+          <div className="capitalize text-sm">{getOneContact?.country}</div>
         </div>
 
         <div className="mt-3">
           <div className="text-sm">Location</div>
-          <div className="capitalize">{getOneContact?.location}</div>
+          <div className="capitalize text-sm">{getOneContact?.location}</div>
         </div>
       </div>
 

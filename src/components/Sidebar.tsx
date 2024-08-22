@@ -1,73 +1,98 @@
-import React, { useState } from "react";
+import React, { useRef, useEffect } from "react";
+import { NavLink } from "react-router-dom";
+import Logo from "../assets/Logo.png";
+import { Hamburger } from "./IconUtility";
 
-const Sidebar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+interface SidebarProps {
+  isOpen: boolean;
+  toggleSidebar: () => void;
+  toggleModal: () => void;
+}
 
-  const toggleSidebar = () => {
-    setIsOpen(!isOpen);
-  };
+const Sidebar: React.FC<SidebarProps> = ({
+  isOpen,
+  toggleSidebar,
+  toggleModal,
+}) => {
+  const sidebarRef = useRef<HTMLDivElement>(null);
+
+  // Close sidebar when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        sidebarRef.current &&
+        !sidebarRef.current.contains(event.target as Node)
+      ) {
+        toggleSidebar(); // Close the sidebar when clicking outside
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [toggleSidebar]);
 
   return (
-    <div className="flex h-screen">
-      {/* Sidebar */}
+    <>
+      <div className="md:hidden fixed top-0 left-0 p-4 z-50">
+        <button
+          onClick={toggleSidebar}
+          className="text-white focus:outline-none"
+        >
+          {!isOpen && <Hamburger />}
+        </button>
+      </div>
+
       <div
+        ref={sidebarRef}
         className={`fixed inset-y-0 left-0 transform ${
           isOpen ? "translate-x-0" : "-translate-x-full"
-        } md:translate-x-0 transition-transform duration-300 ease-in-out bg-gray-800 w-64 p-4`}
+        } md:relative md:translate-x-0 transition-transform duration-300 ease-in-out bg-[#7717D7] w-64 p-4 z-40`}
       >
-        <h2 className="text-white text-2xl font-semibold mb-6">Sidebar</h2>
+        <h2 className="text-white text-2xl font-semibold my-6">
+          <img src={Logo} alt="Logo" />
+        </h2>
         <ul>
-          <li className="text-gray-300 hover:bg-gray-700 p-2 rounded-md">
-            <a href="#">Dashboard</a>
+          <li className="text-gray-300 rounded-md">
+            <NavLink
+              to="/user/home"
+              className={({ isActive }) =>
+                `block p-2 rounded-md ${
+                  isActive
+                    ? "bg-[#ba81f2] text-white"
+                    : "hover:bg-[#ba81f2] hover:text-white"
+                }`
+              }
+            >
+              Dashboard
+            </NavLink>
           </li>
-          <li className="text-gray-300 hover:bg-gray-700 p-2 rounded-md">
-            <a href="#">Profile</a>
+          <li className="text-gray-300 rounded-md pt-2">
+            <NavLink
+              to="/user/contacts"
+              className={({ isActive }) =>
+                `block p-2 rounded-md ${
+                  isActive
+                    ? "bg-[#ba81f2] text-white"
+                    : "hover:bg-[#ba81f2] hover:text-white"
+                }`
+              }
+            >
+              Contacts
+            </NavLink>
           </li>
-          <li className="text-gray-300 hover:bg-gray-700 p-2 rounded-md">
-            <a href="#">Settings</a>
-          </li>
-          <li className="text-gray-300 hover:bg-gray-700 p-2 rounded-md">
-            <a href="#">Logout</a>
+          <li
+            className="text-gray-300 rounded-md pt-2 cursor-pointer"
+            onClick={toggleModal}
+          >
+            <div className="hover:bg-[#ba81f2] hover:text-white p-2">
+              Logout
+            </div>
           </li>
         </ul>
       </div>
-
-      {/* Main content */}
-      <div className="flex-1 flex flex-col">
-        {/* Header */}
-        <div className="flex items-center justify-between bg-gray-100 p-4 md:hidden">
-          <button onClick={toggleSidebar} className="text-gray-800">
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h16M4 18h16"
-              ></path>
-            </svg>
-          </button>
-          <h1 className="text-lg font-semibold text-gray-800">Page Title</h1>
-        </div>
-
-        {/* Content */}
-        <div className="p-6 bg-gray-100 flex-1">
-          <h2 className="text-2xl font-bold">Main Content</h2>
-          <p className="mt-4">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugit
-            doloremque ipsam itaque non provident perferendis fugiat! Quisquam
-            ullam, repudiandae consequuntur obcaecati rerum officiis quo id
-            optio blanditiis deleniti fuga, autem vitae perspiciatis architecto!
-            Repellendus?
-          </p>
-        </div>
-      </div>
-    </div>
+    </>
   );
 };
 

@@ -13,7 +13,7 @@ const contactValidator = Yup.object().shape({
     .min(2, "Last name must be at least 2 characters")
     .max(50, "Last name must be at most 50 characters"),
   middleName: Yup.string()
-    .optional() // Middle name might not be required
+    .optional()
     .max(50, "Middle name must be at most 50 characters"),
   phoneNumber: Yup.string()
     .required("Phone number is required")

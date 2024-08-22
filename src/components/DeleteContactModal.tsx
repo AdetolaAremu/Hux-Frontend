@@ -1,4 +1,5 @@
 import { IContact } from "../types/response/PrivateResponse";
+import { Xmark } from "./IconUtility";
 
 export interface IModal {
   modal: boolean;
@@ -28,7 +29,7 @@ const DeleteContactModal = ({
               onClick={onClose}
               className="text-black flex justify-end cursor-pointer"
             >
-              x
+              <Xmark />
             </div>
 
             <div>

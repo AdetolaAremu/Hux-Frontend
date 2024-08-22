@@ -1,130 +1,72 @@
+import EventCard from "../../components/EventCard";
+import {
+  NewUser,
+  UserGroup,
+  UserQuater,
+  UserYear,
+} from "../../components/IconUtility";
 import CardList from "../../components/NewContacts";
+import StatsCard from "../../components/StatsCard";
+import { IStatItem } from "../../types/PrivateType";
 
 const Home = () => {
+  const statsArea: IStatItem[] = [
+    { name: "Your Contacts", figure: 200, icon: UserGroup },
+    { name: "New Contacts Today", figure: 3, icon: NewUser },
+    { name: "New Contacts This Quarter", figure: 33, icon: UserQuater },
+    { name: "New Contacts This Year", figure: 25, icon: UserYear },
+  ];
+
+  const eventsCard = [
+    {
+      title: "The Network",
+      eventType: "Africa Must Connect",
+      details:
+        "There is need to connect with African's alike and say things we must say",
+    },
+    {
+      title: "Contact Hangout - UK",
+      eventType: "Hangout",
+      details:
+        "Hangout with your contact and let's talk about how to make this contact workout",
+    },
+    {
+      title: "Contact Hangout - South Africa",
+      eventType: "Hangout SA",
+      details:
+        " Hangout with your esteemed contacts in SA, words needs to be spoken.",
+    },
+    {
+      title: "Contact Hangout -Nairobi",
+      eventType: "Hangout Nairobi",
+      details:
+        " Hangout with your esteemed contacts in Nairobi. words needs to be spoken.",
+    },
+  ];
   return (
     <>
-      <div className="flex justify-between mt-8">
-        <div className="bg-white rounded-lg w-64 p-2">
-          <div className="flex justify-between">
-            <div className="text-xs text-gray-600">Your Contacts</div>
-            <div>O</div>
+      <div className="flex flex-col lg:flex-row lg:space-x-4 mt-8">
+        {statsArea.map((stat, index) => (
+          <div key={index} className="flex-1 mb-4 lg:mb-0">
+            <StatsCard figure={stat.figure} name={stat.name} icon={stat.icon} />
           </div>
-          <div className="mt-2">20</div>
-        </div>
-
-        <div className="bg-white rounded-lg w-64 p-2">
-          <div className="flex justify-between">
-            <div className="text-xs text-gray-600">New Contacts Today</div>
-            <div>O</div>
-          </div>
-          <div className="mt-2">20</div>
-        </div>
-
-        <div className="bg-white rounded-lg w-64 p-2">
-          <div className="flex justify-between">
-            <div className="text-xs text-gray-600">
-              New Contacts This Quater
-            </div>
-            <div>O</div>
-          </div>
-          <div className="mt-2">20</div>
-        </div>
-        <div className="bg-white rounded-lg w-64 p-2">
-          <div className="flex justify-between">
-            <div className="text-xs text-gray-600">New Contacts This Year</div>
-            <div>O</div>
-          </div>
-          <div className="mt-2">20</div>
-        </div>
+        ))}
       </div>
 
       <div className="text-gray-600 mt-10">Events</div>
-      <div className="flex justify-between">
-        <div className="grid grid-cols-2 w-[80%]">
-          <div className="mt-3">
-            <div className="max-w-sm rounded-lg shadow-lg p-6 bg-white">
-              <p className="text-sm text-gray-500 font-semibold mb-2">
-                The Network
-              </p>
-              <h3 className="text-2xl font-bold text-gray-800 mb-4">
-                Africa Must Connect
-              </h3>
-              <p className="text-gray-600 mb-6">
-                There is need to connect with African's alike and say things we
-                must say.
-              </p>
-              <a
-                href="#"
-                className="text-sm font-medium text-gray-800 flex items-center"
-              >
-                Read more <span className="ml-2">→</span>
-              </a>
-            </div>
-          </div>
-
-          <div className="mt-3">
-            <div className="max-w-sm rounded-lg shadow-lg p-6 bg-white">
-              <p className="text-sm text-gray-500 font-semibold mb-2">
-                Contact Hangout - UK
-              </p>
-              <h3 className="text-2xl font-bold text-gray-800 mb-4">Hangout</h3>
-              <p className="text-gray-600 mb-6">
-                Hangout with your contact and let's talk about how to make this
-                contact workout
-              </p>
-              <a
-                href="#"
-                className="text-sm font-medium text-gray-800 flex items-center"
-              >
-                Read more <span className="ml-2">→</span>
-              </a>
-            </div>
-          </div>
-
-          <div className="mt-3">
-            <div className="max-w-sm rounded-lg shadow-lg p-6 bg-white">
-              <p className="text-sm text-gray-500 font-semibold mb-2">
-                Contact Hangout - South Africa
-              </p>
-              <h3 className="text-2xl font-bold text-gray-800 mb-4">
-                Hangout SA
-              </h3>
-              <p className="text-gray-600 mb-6">
-                Hangout with your esteemed contacts in SA, words needs to be
-                spoken.
-              </p>
-              <a
-                href="#"
-                className="text-sm font-medium text-gray-800 flex items-center"
-              >
-                Read more <span className="ml-2">→</span>
-              </a>
-            </div>
-          </div>
-
-          <div className="mt-3">
-            <div className="max-w-sm rounded-lg shadow-lg p-6 bg-white">
-              <p className="text-sm text-gray-500 font-semibold mb-2">
-                Contact Hangout - Nairobi
-              </p>
-              <h3 className="text-2xl font-bold text-gray-800 mb-4">
-                Hangout Nairobi
-              </h3>
-              <p className="text-gray-600 mb-6">
-                Hangout with your esteemed contacts in Nairobi. words needs to
-                be spoken.
-              </p>
-              <a
-                href="#"
-                className="text-sm font-medium text-gray-800 flex items-center"
-              >
-                Read more <span className="ml-2">→</span>
-              </a>
-            </div>
-          </div>
+      <div className="flex flex-col lg:flex-row justify-between">
+        <div className="grid grid-cols-1 lg:grid-cols-2 w-full lg:w-4/5">
+          {eventsCard.map((eventCard, index) => (
+            <EventCard
+              key={index}
+              title={eventCard.title}
+              details={eventCard.details}
+              eventType={eventCard.eventType}
+            />
+          ))}
         </div>
 
-        <div className="w-[26%]">
+        <div className="w-full lg:w-[26%] mt-5 lg:mt-0">
           <CardList />
         </div>
       </div>

@@ -33,3 +33,9 @@ export interface IUser {
   lastName: String;
   email: String;
 }
+
+export interface IStatItem {
+  name: string;
+  figure: number;
+  icon: React.ComponentType;
+}

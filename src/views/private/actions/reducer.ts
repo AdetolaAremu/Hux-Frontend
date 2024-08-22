@@ -1,6 +1,7 @@
 import { IAllUsers, LoggedInUser } from "../../../types/PrivateType";
 import { ErrorResponse } from "../../../types/response/ErrorResponse";
 import { IContact } from "../../../types/response/PrivateResponse";
+import { GET_ONE_DATA } from "../../auth/actions/types";
 import {
   GET_DATA,
   GET_ERRORS,
@@ -54,6 +55,11 @@ const privateReducer = (state = init, action: any) => {
       return {
         ...state,
         getData: action.payload,
+      };
+    case GET_ONE_DATA:
+      return {
+        ...state,
+        getOneContact: action.payload,
       };
     case GET_LOGGED_IN_USER:
       return {

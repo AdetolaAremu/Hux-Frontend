@@ -1,3 +1,5 @@
+import { Xmark } from "./IconUtility";
+
 export interface IModal {
   modal: boolean;
   onClose: () => void;
@@ -18,7 +20,7 @@ const LogoutModal = ({ modal, onClose = () => {}, onDelete }: IModal) => {
               onClick={onClose}
               className="text-black flex justify-end cursor-pointer"
             >
-              x
+              <Xmark />
             </div>
 
             <div className="text-center">Are you sure you want to Logout</div>

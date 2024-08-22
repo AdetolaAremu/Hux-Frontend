@@ -27,6 +27,13 @@ export const setCurrentUser = (decoded: any) => {
 
 const service_url = import.meta.env.VITE_BASE_URL;
 
+const saveTokenToLocalStorage = (token: string) => {
+  return new Promise((resolve) => {
+    localStorage.setItem("jwtToken", token);
+    resolve(true);
+  });
+};
+
 export const loginUser = (
   userData: ILogin
 ): ThunkAction<Promise<void>, RootState, unknown, any> => {
@@ -39,7 +46,7 @@ export const loginUser = (
         userData
       );
       const { token } = response.data;
-      localStorage.setItem("jwtToken", token);
+      await saveTokenToLocalStorage(token);
       const decoded = jwtDecode(token);
       dispatch(getLoggedInUser());
       dispatch(setCurrentUser(decoded));

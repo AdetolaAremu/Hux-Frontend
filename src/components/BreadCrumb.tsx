@@ -3,7 +3,6 @@ import { ArrowForward } from "./IconUtility";
 
 export interface IBread {
   routeName: string;
-  // link: string;
 }
 
 const Breadcrumb = ({ routeName }: IBread) => {
@@ -15,7 +14,7 @@ const Breadcrumb = ({ routeName }: IBread) => {
             to="/user/contacts"
             className="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600"
           >
-            Home
+            All Contacts
           </Link>
         </li>
         <li>
