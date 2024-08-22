@@ -6,7 +6,13 @@ import {
   IGetOneContactResponse,
 } from "../../../types/response/PrivateResponse";
 import { RootState } from "../../../store/RootReducer";
-import { GET_DATA, GET_ERRORS, LOADING_ENDS, LOADING_STARTS } from "./types";
+import {
+  GET_DATA,
+  GET_ERRORS,
+  GET_LOGGED_IN_USER,
+  LOADING_ENDS,
+  LOADING_STARTS,
+} from "./types";
 import { ErrorResponse } from "../../../types/response/ErrorResponse";
 import axiosInstance from "../../../utils/AxiosInterceptor";
 import { GET_ONE_DATA } from "../../auth/actions/types";
@@ -196,10 +202,10 @@ export const getLoggedInUser = (): ThunkAction<
       const { data } = response.data;
       localStorage.setItem("user", JSON.stringify(data.user));
 
-      // dispatch({
-      //   type: GET_LOGGED_IN_USER,
-      //   payload: response.data.data.user,
-      // });
+      dispatch({
+        type: GET_LOGGED_IN_USER,
+        payload: response.data.data.user,
+      });
 
       dispatch({ type: LOADING_ENDS });
     } catch (error: ErrorResponse | any) {

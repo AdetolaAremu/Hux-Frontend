@@ -29,6 +29,7 @@ const service_url = import.meta.env.VITE_BASE_URL;
 const saveTokenToLocalStorage = (token: string) => {
   return new Promise((resolve) => {
     localStorage.setItem("jwtToken", token);
+    localStorage.setItem("Authenticated", JSON.stringify(true));
     resolve(true);
   });
 };
@@ -47,9 +48,10 @@ export const loginUser = (
       const { token } = response.data;
       await saveTokenToLocalStorage(token);
       const decoded = jwtDecode(token);
-      dispatch(getLoggedInUser());
       dispatch(setCurrentUser(decoded));
+      // dispatch(getLoggedInUser());
       dispatch({ type: AUTH_LOADING_ENDS });
+      window.location.href = "/user/home";
     } catch (error: ErrorResponse | any) {
       dispatch({ type: AUTH_LOADING_ENDS });
       if (error.response) {

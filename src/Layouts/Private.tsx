@@ -6,15 +6,17 @@ import ContactDetails from "../views/private/ContactDetails";
 import CreateContact from "../views/private/CreateContact";
 import EditContact from "../views/private/EditContact";
 import LogoutModal from "../components/LogoutModal";
-import { useAppDispatch } from "../utils/Hook";
-import { callLogoutUser } from "../views/private/actions/actions";
-import { LoggedInUser } from "../types/PrivateType";
+import { useAppDispatch, useTypedSelector } from "../utils/Hook";
+import {
+  callLogoutUser,
+  getLoggedInUser,
+} from "../views/private/actions/actions";
 import Sidebar from "../components/Sidebar";
 
 const Private = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isUser, setIsUser] = useState<LoggedInUser | null>(null);
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const { loggedInUser } = useTypedSelector((state) => state.private);
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -34,13 +36,14 @@ const Private = () => {
 
   useEffect(() => {
     const getToken = localStorage.getItem("jwtToken");
-    if (!getToken) return navigate("/auth/login");
 
-    const user = localStorage.getItem("user");
-    if (user) {
-      setIsUser(JSON.parse(user) as LoggedInUser);
+    if (!getToken) {
+      navigate("/auth/login");
+      return;
     }
-  }, []);
+
+    dispatch(getLoggedInUser());
+  }, [dispatch, navigate]);
 
   return (
     <div className="flex h-screen">
@@ -59,7 +62,7 @@ const Private = () => {
       <div className="flex-1 flex flex-col">
         <div className="flex justify-end pt-3 px-10 bg-gray-100">
           <div className="pt-4">
-            Hi, {isUser?.firstName} {isUser?.lastName}
+            Hi, {loggedInUser?.firstName} {loggedInUser?.lastName}
           </div>
         </div>
         <div className="flex-1 p-6 bg-gray-100">

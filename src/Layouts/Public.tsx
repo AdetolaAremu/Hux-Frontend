@@ -1,10 +1,22 @@
-import { Link, Navigate, Route, Routes } from "react-router-dom";
+import { Link, Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import HomePage from "../views/public/HomePage";
 import Logo from "../assets/Logo.png";
+import { useEffect } from "react";
 
 const PublicLayout = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const isAuthenticated = localStorage.getItem("Authenticated");
+
+    if (isAuthenticated === "true") {
+      navigate("/user/home");
+    } else {
+      navigate("/");
+    }
+  }, [navigate]);
   return (
-    <div>
+    <div className="overflow-hidden">
       <div className="flex justify-between pt-3 px-10">
         <div>
           <Link to="/" className="hover:text-[#7717D7]">

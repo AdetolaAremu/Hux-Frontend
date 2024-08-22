@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import React, { ChangeEvent } from "react";
 import TextInput from "../../components/TextInput";
 import { ILogin } from "../../types/AuthType";
@@ -25,8 +25,6 @@ const Login = () => {
     setInputs({ ...Inputs, [e.target.name]: e.target.value });
   };
 
-  const navigate = useNavigate();
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -36,8 +34,6 @@ const Login = () => {
       dispatch(loginUser(Inputs));
 
       setInputs(initialState);
-
-      navigate("/user/home");
 
       dispatch({ type: CHECK_IF_USER_IS_LOGGED_IN, payload: true });
 

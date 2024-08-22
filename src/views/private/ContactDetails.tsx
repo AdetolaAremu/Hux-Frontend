@@ -38,7 +38,6 @@ const ContactDetails = () => {
 
   React.useEffect(() => {
     dispatch(getContact(id ?? ""));
-    console.log(getOneContact, "data");
   }, [dispatch]);
   return (
     <>
