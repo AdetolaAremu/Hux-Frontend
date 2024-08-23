@@ -33,7 +33,10 @@ export const getContacts = (): ThunkAction<
         `${service_url}/contacts`
       );
 
-      dispatch({ type: GET_DATA, payload: response.data.data?.contacts });
+      dispatch({
+        type: GET_DATA,
+        payload: response.data?.data?.contacts || [],
+      });
 
       dispatch({ type: LOADING_ENDS });
     } catch (error: ErrorResponse | any) {

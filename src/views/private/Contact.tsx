@@ -7,12 +7,10 @@ import { getContacts } from "./actions/actions";
 const Contact = () => {
   const dispatch = useAppDispatch();
 
-  const { getData, loading } = useTypedSelector((state) => state.private);
+  const { getData } = useTypedSelector((state) => state.private);
 
   React.useEffect(() => {
     dispatch(getContacts());
-    console.log(getData, "data");
-    console.log(loading, "loading");
   }, [dispatch]);
 
   return (
@@ -29,7 +27,7 @@ const Contact = () => {
         </div>
       </div>
 
-      <ContactsTable data={getData} />
+      <ContactsTable data={Array.isArray(getData) ? getData : []} />
     </div>
   );
 };

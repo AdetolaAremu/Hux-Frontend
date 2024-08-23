@@ -15,7 +15,6 @@ import {
   ILoginResponse,
   IRegistrationResponse,
 } from "../../../types/response/AuthResponse";
-import { getLoggedInUser } from "../../private/actions/actions";
 
 export const setCurrentUser = (decoded: any) => {
   return {
@@ -26,6 +25,7 @@ export const setCurrentUser = (decoded: any) => {
 
 const service_url = import.meta.env.VITE_BASE_URL;
 
+// we need to await this operation so we can save it to the local storage before doing any auth operation
 const saveTokenToLocalStorage = (token: string) => {
   return new Promise((resolve) => {
     localStorage.setItem("jwtToken", token);
@@ -49,7 +49,6 @@ export const loginUser = (
       await saveTokenToLocalStorage(token);
       const decoded = jwtDecode(token);
       dispatch(setCurrentUser(decoded));
-      // dispatch(getLoggedInUser());
       dispatch({ type: AUTH_LOADING_ENDS });
       window.location.href = "/user/home";
     } catch (error: ErrorResponse | any) {
@@ -110,7 +109,34 @@ export const registerUser = (
   };
 };
 
-export const logoutUser = () => () => {
-  localStorage.clear();
-  window.location.href = "/auth/user";
+export const logoutUser = (): ThunkAction<
+  Promise<void>,
+  RootState,
+  unknown,
+  any
+> => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: AUTH_LOADING_STARTS });
+
+      await axios.post(`${service_url}/auth/logout`);
+
+      localStorage.clear();
+      window.location.href = "/auth/user";
+
+      dispatch({ type: AUTH_LOADING_ENDS });
+    } catch (error: ErrorResponse | any) {
+      dispatch({ type: AUTH_LOADING_ENDS });
+      if (error.response) {
+        if (error.response.status !== 500) {
+          dispatch({ type: GET_AUTH_ERROR, payload: error.response });
+        } else {
+          dispatch({
+            type: GET_AUTH_ERROR,
+            payload: "Sorry, something went wrong!",
+          });
+        }
+      }
+    }
+  };
 };

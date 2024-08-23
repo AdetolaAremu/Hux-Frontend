@@ -6,7 +6,9 @@ interface ContactsTableProps {
   data: IContact[];
 }
 
-const ContactsTable: React.FC<ContactsTableProps> = ({ data }) => {
+const ContactsTable: React.FC<ContactsTableProps> = ({
+  data = [],
+}: ContactsTableProps) => {
   return (
     <div className="mx-auto bg-white shadow-md rounded-lg overflow-x-auto">
       <table className="min-w-full table-auto">

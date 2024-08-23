@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 
+// our clickoutside global function
 const useOutsideClick = (callback: () => void) => {
   const ref = useRef<HTMLDivElement>(null);
 

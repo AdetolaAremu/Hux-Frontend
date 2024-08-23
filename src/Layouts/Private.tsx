@@ -35,7 +35,7 @@ const Private = () => {
   };
 
   useEffect(() => {
-    const getToken = localStorage.getItem("jwtToken");
+    const getToken = localStorage.getItem("jwtToken"); // we need to check if user is logged in
 
     if (!getToken) {
       navigate("/auth/login");

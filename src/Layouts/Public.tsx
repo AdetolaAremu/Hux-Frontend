@@ -7,7 +7,7 @@ const PublicLayout = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const isAuthenticated = localStorage.getItem("Authenticated");
+    const isAuthenticated = localStorage.getItem("Authenticated"); // if user is authenticated, redirect them to the dashboard
 
     if (isAuthenticated === "true") {
       navigate("/user/home");
