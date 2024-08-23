@@ -174,7 +174,7 @@ const CreateContact = () => {
 
       <Modal
         modal={modal}
-        message="Contact deleted successfully"
+        message="Contact created successfully"
         onClose={toggleModal}
       />
     </>

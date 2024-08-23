@@ -122,7 +122,7 @@ const ContactDetails = () => {
 
       <Modal
         modal={modal}
-        message="Contact created successfully"
+        message="Contact Deleted successfully"
         onClose={toggleModal}
       />
     </>
